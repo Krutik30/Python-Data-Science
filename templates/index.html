@@ -2,14 +2,96 @@
 <html>
 <head>
     <title>Aadhar Number Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #007BFF;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            display: none;
+        }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+        .file-name-label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .resultCard{
+            color: 'red';
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload Your Aadhar Card</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".jpg, .jpeg, .png" required>
-        <input type="submit" value="Submit">
-    </form>
-    <br>
-    <h2>{{ result }}</h2>
+    <div class="container">
+        <h1>Aadhar Number Extractor</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label class="custom-file-upload">
+                <input type="file" name="file" id="fileInput" accept=".jpg, .jpeg, .png" required onchange="showFileName()">
+                Choose File
+            </label>
+            <span id="fileLabel" class="file-name-label"></span>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <h2 class='resultCard'>{{ result }}</h2>
+    </div>
+
+    <script>
+        function showFileName() {
+            var input = document.getElementById('fileInput');
+            var fileName = input.value.split('\\').pop();
+            document.getElementById('fileLabel').innerText = fileName;
+        }
+    </script>
 </body>
 </html>
